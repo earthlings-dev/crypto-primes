@@ -7,35 +7,32 @@ description = "Random prime number generation and primality checking library"
 repository = "https://github.com/entropyxyz/crypto-primes"
 readme = "README.md"
 categories = ["cryptography", "no-std"]
-rust-version = "1.85"
+rust-version = "1.93"
 
 [dependencies]
 crypto-bigint = { version = "0.7.0-rc.27", default-features = false, features = ["rand_core"] }
-libm = { version = "0.2.13", default-features = false, features = ["arch"] }
+libm = { version = "0.2.16", default-features = false, features = ["arch"] }
 rand_core = { version = "0.10", default-features = false }
 rayon = { version = "1", optional = true, default-features = false }
 
 # Optional dependencies used in tests and benchmarks
-openssl = { version = "0.10.39", optional = true, features = ["vendored"] }
-rug = { version = "1.26", optional = true, default-features = false, features = ["integer"] }
+openssl = { version = "0.10.75", optional = true, features = ["vendored"] }
+rug = { version = "1.28", optional = true, default-features = false, features = ["integer"] }
 glass_pumpkin = { version = "1", optional = true }
 
 [dev-dependencies]
 rand = { version = "0.10", features = ["chacha"] }
 # need `crypto-bigint` with `alloc` to test `BoxedUint`
-crypto-bigint = { version = "0.7.0-pre.27", default-features = false, features = ["alloc"] }
-criterion = { version = "0.5", features = ["html_reports"] }
-num-modular = { version = "0.5", features = ["num-bigint"] }
+crypto-bigint = { version = "0.7.0-rc.27", default-features = false, features = ["alloc"] }
+criterion = { version = "0.8", features = ["html_reports"] }
+num-modular = { version = "0.6", features = ["num-bigint"] }
 num-bigint = "0.4"
 num-integer = "0.1"
 proptest = "1"
-num-prime = "0.4.3"
-num_cpus = "1.16"
+num-prime = "0.4.4"
+num_cpus = "1.17"
 float-cmp = "0.10"
 
-# Temporary old versions for `glass_pumpkin` tests. Remove when `glass_pumpking` switches to `rand_core=0.9`.
-rand_core_06 = { package = "rand_core", version = "0.6.4", default-features = false }
-rand_chacha_03 = { package = "rand_chacha", version = "0.3", default-features = false }
 
 [features]
 tests-openssl = ["openssl"]
@@ -61,6 +58,15 @@ harness = false
 [[bench]]
 name = "cctv"
 harness = false
+
+[patch.crates-io]
+crypto-bigint = { git = "https://github.com/earthlings-dev/rustcrypto-crypto-bigint" }
+glass_pumpkin = { git = "https://github.com/earthlings-dev/agora-glass_pumpkin" }
+num-bigint = { git = "https://github.com/earthlings-dev/num-bigint" }
+num-modular = { git = "https://github.com/earthlings-dev/num-modular" }
+num-prime = { git = "https://github.com/earthlings-dev/num-prime" }
+rand = { git = "https://github.com/earthlings-dev/rand" }
+rand_core = { git = "https://github.com/earthlings-dev/rand_core" }
 
 [lints.rust.unexpected_cfgs]
 level = "warn"

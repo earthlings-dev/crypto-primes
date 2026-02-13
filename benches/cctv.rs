@@ -1,6 +1,7 @@
+use std::hint::black_box;
 use std::io::BufRead;
 
-use criterion::{Criterion, black_box, criterion_group, criterion_main};
+use criterion::{Criterion, criterion_group, criterion_main};
 use crypto_bigint::U1024;
 
 use crypto_primes::{Flavor, is_prime};

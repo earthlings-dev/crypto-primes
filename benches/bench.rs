@@ -485,8 +485,8 @@ fn bench_glass_pumpkin(c: &mut Criterion) {
     use crypto_bigint::Limb;
     use crypto_primes::hazmat::{AStarBase, LucasCheck, MillerRabin, Primality, lucas_test};
 
-    fn make_rng_gp() -> rand_chacha_03::ChaCha8Rng {
-        <rand_chacha_03::ChaCha8Rng as rand_core_06::SeedableRng>::from_seed(*b"01234567890123456789012345678901")
+    fn make_rng_gp() -> ChaCha8Rng {
+        ChaCha8Rng::from_seed(*b"01234567890123456789012345678901")
     }
 
     // The `glass-pumpkin` implementation is doing a different number of M-R checks than this crate.
